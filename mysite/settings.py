@@ -143,7 +143,7 @@ if os.getcwd() == '/app':
 
     #Allow all host headers
 
-    ALLOWED_HOSTS = ['pavanasapp.herokuapp.com']
+    ALLOWED_HOSTS = ['quizdjango1.herokuapp.com']
 
     DEBUG = True
 
