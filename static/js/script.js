@@ -1,6 +1,6 @@
 var questions = [];
   $.ajax({
-    url: 'http://127.0.0.1:8000/api/?format=json',
+    url: 'https://quizdjango1.herokuapp.com/api/?format=json',
     type:'GET',
     async:true,
     dataType: "json",
