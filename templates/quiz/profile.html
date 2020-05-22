@@ -1,0 +1,28 @@
+{% extends 'quiz/base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <h2>User profile</h2>
+    </div>
+</div>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username"><b>Name</b></label> : {{user.username}}
+                </div>
+        </form>
+        <hr>
+        <h1>Results</h1>
+        <p><b>Score :</b>  </p>
+    </div>
+</div>
+{% endblock %}

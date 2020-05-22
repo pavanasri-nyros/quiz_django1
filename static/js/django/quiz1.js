@@ -1,6 +1,6 @@
 var questions = [];
   $.ajax({
-    url: 'https://quizdjango1.herokuapp.com/api/?format=json',
+    url: 'http://127.0.0.1:8000/api3/?format=json',
     type:'GET',
     async:true,
     dataType: "json",
@@ -12,13 +12,16 @@ var questions = [];
      }
 });
 
-  
+
+
+//------------------------------------------
   var currentQuestion = 0;
   var score = 0;
   var totQuestions = 8;
   var AnswerOption = null;
   
-  function loadQuestion() {
+  function loadQuestion() 
+  {
     resetColor();
     enableAll();
     //questionIndex = 0
@@ -34,12 +37,13 @@ var questions = [];
     opt3.innerHTML = questions[currentQuestion].option3;
     opt4.innerHTML = questions[currentQuestion].option4;
     
-    if(1 == parseInt(questions[currentQuestion].correct_answer)) AnswerOption = opt1;
-    if(2 == parseInt(questions[currentQuestion].correct_answer)) AnswerOption = opt2;
-    if(3 == parseInt(questions[currentQuestion].correct_answer)) AnswerOption = opt3;
-    if(4 == parseInt(questions[currentQuestion].correct_answer)) AnswerOption = opt4;
+    if(1 == parseInt(questions[currentQuestion].answer)) AnswerOption = opt1;
+    if(2 == parseInt(questions[currentQuestion].answer)) AnswerOption = opt2;
+    if(3 == parseInt(questions[currentQuestion].answer)) AnswerOption = opt3;
+    if(4 == parseInt(questions[currentQuestion].answer)) AnswerOption = opt4;
   } 
   
+  //--------------------------------------------------------------------------
   function loadNextQuestion() {
     resetColor();
     enableAll();
@@ -49,7 +53,7 @@ var questions = [];
       return;
     }
     var answer = selectedOption.value;
-    if (questions[currentQuestion].correct_answer == answer) {
+    if (questions[currentQuestion].answer == answer) {
       score += 10;
     }
   
@@ -66,13 +70,27 @@ var questions = [];
     if (currentQuestion == totQuestions) {
       container.style.display = 'none';
       resultCont.style.display = '';
-      resultCont.innerHTML = 'Your Score: ' + score + '/80' + '<br>' + '<a href ="/">Home</a>' ;
-
+      console.log(score);
+      if(score == 0 || score < 40)
+      {
+          resultCont.innerHTML = 'Your Score: ' + score + '/80' + '<br>' + 
+          'You are failed.Try next time!!'+'<br>' +
+           '<a href ="/">Home</a>' + 
+           '<br>' + 
+           '<div class="fb-share-button" data-href="https://herokuapp.quiz_django1.com/" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>';
+      }
+      else {
+        resultCont.innerHTML = 'Your Score: ' + score + '/80' + 
+        '<br>' + 
+        'You are passed.Try next time!!'+
+        '<br>' + '<a href ="/">Home</a>'+ 
+        '<br>' + '<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>' ;
+    }
 
       return;
     }
-   
-
+    
+  
     loadQuestion(currentQuestion);
   }
   
@@ -81,9 +99,14 @@ var questions = [];
     var selectedOption = document.querySelector('input[type=radio]:checked');
     if (selectedOption == AnswerOption) {
       selectedOption.parentNode.style.backgroundColor = "green";
+      nextButton.innerHTML = 'Next';
+
     } else {
       selectedOption.parentNode.style.backgroundColor = "red";
       AnswerOption.parentNode.style.backgroundColor = "green";
+      nextButton.style.backgroundColor = "white";
+      nextButton.innerHTML = 'Next';
+
     }
     disableAll();
   }
@@ -102,11 +125,14 @@ var questions = [];
     }
   }
   
-  
   function resetColor(){
     let options = document.querySelectorAll("input[type=radio]");
     for(let i = 0; i < options.length; ++i){
       options[i].parentNode.style.background = "none";
+      nextButton.style.background = "none";
+      nextButton.innerHTML = '';
+
+
     }
   }
   
@@ -116,3 +142,4 @@ var questions = [];
 
 
 
+  

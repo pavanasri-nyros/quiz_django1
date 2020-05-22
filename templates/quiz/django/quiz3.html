@@ -1,0 +1,27 @@
+{% extends 'quiz/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div id="quizContainer" class="containera">
+    <div class="title">HTML Quiz</div> 
+    <div class ="time">
+        <p id="timer">Timer</p>
+    </div>
+    <div id="question" class="question"></div>
+    <label class="option"><input type="radio" name="option" value="1" onchange="check(this);"/> <span id="opt1"></span></label>
+    <label class="option"><input type="radio" name="option" value="2" onchange="check(this);" /> <span id="opt2"></span></label>
+    <label class="option"><input type="radio" name="option" value="3" onchange="check(this);"/> <span id="opt3"></span></label>
+    <label class="option"><input type="radio" name="option" value="4" onchange="check(this);"/> <span id="opt4"></span></label>
+    <button id="nextButton"  onclick="loadNextQuestion();"></button>
+</div>
+<div id="result" class="containera result" style="display:none;">
+</div>
+
+<script src = "{%  static 'js/timmer.js' %}"></script>
+<script src="{% static 'js/django/quiz3.js'%}"></script>
+
+
+
+{% endblock %}
