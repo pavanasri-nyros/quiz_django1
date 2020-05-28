@@ -32,7 +32,8 @@ from .views import  VueAPIDetailtfive,  VueAPIfive
 urlpatterns = [
 
     path('home', views.home,name = "home"),
-    path('', views.main, name = "main"),
+    path('main',views.main, name='main'),
+    path('', views.score, name = "score"),
     path('profile/',views.profile, name = "profile"),
     path('category/',views.category, name = "category"),
 
@@ -166,5 +167,7 @@ urlpatterns = [
     path('api25/', VueAPIDetailtfive.as_view(),name = "quizapidetail" ),
     path('api25/<int:pk>/',VueAPIfive.as_view(), name = "list"), 
 
+
+   #path('target_view/',views.target_view, name="target_view"),
 
    ]

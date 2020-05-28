@@ -1,3 +1,29 @@
+/*timer*/
+  var minutesLabel = document.getElementById("minutes");
+  var secondsLabel = document.getElementById("seconds");
+  var totalSeconds = 0;
+  setInterval(setTime, 1000);
+  
+  function setTime() {
+    ++totalSeconds;
+    secondsLabel.innerHTML = pad(totalSeconds % 60);
+    minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+
+  }
+
+  
+  function pad(val) {
+    var valString = val + "";
+    if (valString.length < 2) {
+      return "0" + valString;
+    } else {
+      return valString;
+    }
+  }
+  
+
+/*ajax call*/
+
 var questions = [];
   $.ajax({
     url: 'http://127.0.0.1:8000/api2/?format=json',
@@ -14,7 +40,7 @@ var questions = [];
 
 
 
-//------------------------------------------
+//Displaying questions
   var currentQuestion = 0;
   var score = 0;
   var totQuestions = 8;
@@ -22,6 +48,8 @@ var questions = [];
   
   function loadQuestion() 
   {
+
+    
     resetColor();
     enableAll();
     //questionIndex = 0
@@ -43,7 +71,7 @@ var questions = [];
     if(4 == parseInt(questions[currentQuestion].answer)) AnswerOption = opt4;
   } 
   
-  //--------------------------------------------------------------------------
+  //Loading next question
   function loadNextQuestion() {
     resetColor();
     enableAll();
@@ -64,35 +92,58 @@ var questions = [];
     if (currentQuestion == totQuestions - 1) {
       nextButton.innerHTML = 'Finish';
     }
-  
+
+   
+
     var container = document.getElementById('quizContainer');
     var resultCont = document.getElementById('result');
+    var timeCont = document.getElementById('counter');
+    var statusCont = document.getElementById('status');
+    var homeCont = document.getElementById('home');
+    var nameCont=document.getElementById('name');
+     var scoresaver = document.getElementById('scoresaver');
     if (currentQuestion == totQuestions) {
       container.style.display = 'none';
       resultCont.style.display = '';
-      console.log(score);
+      timeCont.style.display='';
+      statusCont.style.display='';
+      homeCont.style.display='';
+      nameCont.style.display='';
+      scoresaver.style.display='';
+
+
+      localStorage.setItem('scores',score)
+      var scoress = localStorage.getItem('scores')
+
       if(score == 0 || score < 40)
       {
-          resultCont.innerHTML = 'Your Score: ' + score + '/80' + '<br>' + 
-          'You are failed.Try next time!!'+'<br>' +
-           '<a href ="/">Home</a>' + '<br>' + '<div class="fb-share-button" data-href="https://herokuapp.quiz_django1.com/" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>';
-      }
+          resultCont.innerHTML = 'Your Score:- ' + score + '/80' ;
+          timeCont.innerHTML = 'Time taken :' + 'Min:' + minutesLabel.textContent + ':'  + 'Sec:' + secondsLabel.textContent ;
+          statusCont.innerHTML = "Status: FAIL";
+          homeCont.innerHTML =  "<a href ="/" onclick='scoresubmit()'>Submit the score and share the results</a>";
+          scoresaver.innerHTML = "<button onclick='scoresubmit()'>Submit</button>";
+        }
+      
       else {
-        resultCont.innerHTML = 'Your Score: ' + score + '/80' + 
-        '<br>' + 
-        'You are passed.Try next time!!'+
-        '<br>' + '<a href ="/">Home</a>'+ 
-        '<br>' + '<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>' ;
-    }
+        resultCont.innerHTML = 'Your Score:- ' + score + '/80' ;
+          timeCont.innerHTML = 'Time taken :' + 'Min:' + minutesLabel.textContent + ':'  + 'Sec:' + secondsLabel.textContent ;
+          statusCont.innerHTML = "Status: PASS";
+          homeCont.innerHTML =  "<a href ="/" onclick='scoresubmit()'>Submit the score and share the results</a>";
+          scoresaver.innerHTML = "<button onclick='scoresubmit();'>Submit</button>";
 
+        }
+
+        
       return;
     }
     
   
     loadQuestion(currentQuestion);
   }
+
+
   
-  //-------------------------------------------------------------------------------
+  //checking answers
   function check() {
     resetColor();
     var selectedOption = document.querySelector('input[type=radio]:checked');
@@ -110,7 +161,7 @@ var questions = [];
     disableAll();
   }
   
-  //------------------------------------------------------------------------
+  //bg color disabled for each option after the next button clicked
   function disableAll(){
     let options = document.querySelectorAll("input[type=radio]");
     for(let i = 0; i < options.length; ++i){
@@ -118,7 +169,7 @@ var questions = [];
     }
   }
   
-  //-----------------------------------------------------------------
+  
   function enableAll(){
     let options = document.querySelectorAll("input[type=radio]");
     for(let i = 0; i < options.length; ++i){
@@ -126,12 +177,11 @@ var questions = [];
     }
   }
   
-  //----------------------------------------------------------
+  //reset color and next button
   function resetColor(){
     let options = document.querySelectorAll("input[type=radio]");
     for(let i = 0; i < options.length; ++i){
       options[i].parentNode.style.background = "none";
-      // nextButton.innerHTML = '';
       nextButton.style.background = "none";
       nextButton.innerHTML = '';
 
@@ -142,7 +192,32 @@ var questions = [];
   
   loadQuestion(currentQuestion);
 
+// var id_score = document.getElementById('id_score');
+//   function scoresubmit(){
+//   $.ajax({
+//     url: '/',
+//     method : 'POST',
+//     data: {score: $('#result').val(), "csrfmiddlewaretoken" : "{{csrf_token}}"},
+//     success: function(data) {
+
+//       $('#id_score').html(data.parentNode);
+//       console.log(data.score.value);
+//     }
+//      });
+
+//     }
 
 
-
-  
+    function scoresubmit(){
+      $.ajax({
+        url: "/",
+        method : 'POST',
+        data: {
+          score: $('#result').val(), 
+          "csrfmiddlewaretoken" : "{{csrf_token}}"
+        },
+        success: function() {
+          $('#score').html(score);
+        }
+         });
+        }

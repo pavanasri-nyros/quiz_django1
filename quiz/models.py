@@ -27,7 +27,7 @@ class Html2(models.Model):
     answer = models.CharField(max_length = 200)
 
     def __str__(self):
-        return self.question
+        return self.name
 
 
 class Html3(models.Model):
@@ -343,6 +343,9 @@ class Vue5(models.Model):
 #Results Model
 
 class Results(models.Model):
-    username = models.ForeignKey(User,on_delete= models.CASCADE)
-    quizname = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    username = models.CharField(max_length=50,default='')
+    quizname = models.CharField(max_length=50, default='Quiz')
     score = models.IntegerField()
+
+    def __str__(self):
+        return self.username

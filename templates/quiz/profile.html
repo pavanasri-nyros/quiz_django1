@@ -22,7 +22,11 @@
         </form>
         <hr>
         <h1>Results</h1>
-        <p><b>Score :</b>  </p>
+        {% for scores in scores %}
+        <p><b>QuizName : </b>{{scores.quizname}}</p>
+        <p><b>Score :</b> {{scores.score}} </p>
+        <hr>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

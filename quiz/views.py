@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
 from django.utils import timezone
-from .models import Quiz, Html2, Html3, Html4, Html5
+from .models import Quiz, Html2, Html3, Html4, Html5,Results
 from .models import Css1,Css2, Css3, Css4, Css5
 from .models import Js1,Js2,Js3,Js4,Js5
 from .models import Django1, Django2,Django3,Django4,Django5
@@ -16,15 +17,30 @@ from .serializers import Js1Serializers, Js2Serializers, Js3Serializers, Js4Seri
 from .serializers import Django1Serializers,Django2Serializers,Django3Serializers,Django4Serializers,Django5Serializers
 from .serializers import Vue1Serializers,Vue2Serializers,Vue3Serializers,Vue4Serializers,Vue5Serializers
 from django.contrib.auth.decorators import  login_required
-from .forms import UserUpdateForm
+from django.http import HttpResponse
+from .forms import Score
+from django.views.decorators.csrf import csrf_exempt
+
 
 # Create your views here.
 def home(request):
     return render(request, 'quiz/home.html')
 
 @login_required
-def main(request):
-    return render(request,'quiz/main.html')
+@csrf_exempt
+def score(request):
+    if request.method == 'GET':
+        return render(request, 'quiz/html/end.html',{'form':Score()})
+    else:
+        try:
+            form = Score(data=request.POST)
+            newscore = form.save(commit=False)
+            newscore.owner = request.user
+            newscore.save()
+            return redirect('category')
+        except ValueError:
+            return render(request, 'quiz/html/end.html',{'form':Score(), 'error' :'please fill the form properly'})
+
 
 @login_required
 def category(request):
@@ -36,7 +52,11 @@ def quizroom(request):
 
 @login_required
 def html2(request):
-    return render(request,'quiz/html/html2.html')
+    quizname = Html2.objects.all()
+    context = {
+        'quizname':quizname
+    }
+    return render(request,'quiz/html/html2.html',context)
 
 @login_required
 def html3(request):
@@ -140,7 +160,7 @@ def vuejs5(request):
 
 def signupuser(request):
     if request.method == 'GET':
-        return render(request, 'quiz/signupuser.html', {'form': UserCreationForm()})
+        return render(request, 'quiz/accounts/signupuser.html', {'form': UserCreationForm()})
     else:
         #create a new user
         if request.POST['password1'] == request.POST['password2']:
@@ -173,7 +193,8 @@ def logoutuser(request):
   
 
 def profile(request):
-    return render(request,'quiz/profile.html')
+    scores = Results.objects.filter(username=request.user)
+    return render(request,'quiz/profile.html',{'scores':scores})
 
 def profileedit(request):
     if request.method == 'POST':
@@ -454,4 +475,27 @@ class VueAPIfive(generics.RetrieveUpdateDestroyAPIView):
 class VueAPIDetailtfive(generics.ListCreateAPIView):
      queryset = Vue5.objects.all()
      serializer_class = Vue5Serializers
+import json
 
+
+def target_view(request):
+    if request.method == 'GET':
+        return render(request, 'quiz/html/end.html',{'form':Score()})
+    else:
+        try:
+            form = Score(data=request.POST)
+            newscore = form.save(commit=False)
+            newscore.user= request.user
+            newscore.save()
+            return redirect('profile')
+        except ValueError:
+            return render(request, 'quiz/html/end.html',{'form':Score(), 'error' :'please fill the form properly'})
+
+
+   
+def main(request):
+    return render(request,'quiz/main.html')
+   
+   
+   
+  
