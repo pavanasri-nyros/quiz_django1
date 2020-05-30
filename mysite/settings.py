@@ -143,7 +143,7 @@ if os.getcwd() == '/app':
 
     #Allow all host headers
 
-    ALLOWED_HOSTS = ['quizdjango1.herokuapp.com']
+    ALLOWED_HOSTS = ['quizdjango2.herokuapp.com']
 
     DEBUG = True
 
@@ -154,9 +154,3 @@ if os.getcwd() == '/app':
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'pavanasri.nyros@gmail.com'
-EMAIL_HOST_PASSWORD = 'Vjkifdrsg@2'
