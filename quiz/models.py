@@ -272,4 +272,4 @@ class Results(models.Model):
     status = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
-        return self.username 
+        return self.username or ''
