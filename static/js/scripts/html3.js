@@ -26,7 +26,7 @@ function pad(val) {
 
 var questions = [];
 $.ajax({
-  url: 'http://quizdjango2.herokuapp.com/api3/?format=json',
+  url: 'https://quizdjango2.herokuapp.com/api3/?format=json',
   type:'GET',
   async:true,
   dataType: "json",
