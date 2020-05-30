@@ -1,12 +1,6 @@
 from rest_framework import serializers
-from .models import Quiz, Html2, Html3, Html4, Html5
-from .models import Css1, Css2, Css3, Css4, Css5
-from .models import Js1,Js2, Js3, Js4, Js5
-from .models import Django1,Django2, Django3, Django4, Django5
-from .models import Vue1,Vue2, Vue3, Vue4, Vue5
-
-
-
+from .models import Quiz, Html2, Quiz3, Quiz4, Quiz5
+from .models import Quiz6, Quiz7, Quiz8, Quiz9, Quiz10, Quiz11, Quiz12,Quiz13,Quiz14,Quiz15,Quiz16,Quiz17,Quiz18,Quiz19,Quiz20
 
 
 
@@ -25,123 +19,98 @@ class Html2Serializers(serializers.ModelSerializer):
 
 class Html3Serializers(serializers.ModelSerializer):
     class Meta:
-        model = Html3
+        model = Quiz3
         fields = ('id','slug','question','option1','option2','option3','option4','answer')
 
 
 class Html4Serializers(serializers.ModelSerializer):
     class Meta:
-        model = Html4
+        model = Quiz4
         fields = ('id','slug','question','option1','option2','option3','option4','answer')
 
 class Html5Serializers(serializers.ModelSerializer):
     class Meta:
-        model = Html5
+        model = Quiz5
         fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
 
 
 class Css1Serializers(serializers.ModelSerializer):
     class Meta:
-        model = Css1
+        model = Quiz6
         fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
 
 class Css2Serializers(serializers.ModelSerializer):
     class Meta:
-        model = Css2
+        model = Quiz7
         fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
 
 
 class Css3Serializers(serializers.ModelSerializer):
     class Meta:
-        model = Css3
+        model = Quiz8
         fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
 
-class Css4Serializers(serializers.ModelSerializer):
-    class Meta:
-        model = Css4
-        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
+# javascript
 
-class Css5Serializers(serializers.ModelSerializer):
+class Quiz9Serializers(serializers.ModelSerializer):
     class Meta:
-        model = Css5
-        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
-
-#javascript
-class Js1Serializers(serializers.ModelSerializer):
-    class Meta:
-        model = Js1
-        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
-
-class Js2Serializers(serializers.ModelSerializer):
-    class Meta:
-        model = Js2
-        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
-
-class Js3Serializers(serializers.ModelSerializer):
-    class Meta:
-        model = Js3
-        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
-
-class Js4Serializers(serializers.ModelSerializer):
-    class Meta:
-        model = Js4
-        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
-
-class Js5Serializers(serializers.ModelSerializer):
-    class Meta:
-        model = Js5
+        model = Quiz9
         fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
 
 
-#django
-class Django1Serializers(serializers.ModelSerializer):
+class Quiz10Serializers(serializers.ModelSerializer):
     class Meta:
-        model = Django1
-        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
-
-class Django2Serializers(serializers.ModelSerializer):
-    class Meta:
-        model = Django2
-        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
-
-class Django3Serializers(serializers.ModelSerializer):
-    class Meta:
-        model = Django3
-        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
-
-class Django4Serializers(serializers.ModelSerializer):
-    class Meta:
-        model = Django4
-        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
-
-class Django5Serializers(serializers.ModelSerializer):
-    class Meta:
-        model = Django5
+        model = Quiz10
         fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
 
 
-#Vuejs
-class Vue1Serializers(serializers.ModelSerializer):
+class Quiz11Serializers(serializers.ModelSerializer):
     class Meta:
-        model = Vue1
+        model = Quiz11
         fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
 
-class Vue2Serializers(serializers.ModelSerializer):
+class Quiz12Serializers(serializers.ModelSerializer):
     class Meta:
-        model = Vue2
+        model = Quiz12
         fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
 
-class Vue3Serializers(serializers.ModelSerializer):
+
+class Quiz13Serializers(serializers.ModelSerializer):
     class Meta:
-        model = Vue3
+        model = Quiz13
         fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
 
-class Vue4Serializers(serializers.ModelSerializer):
+class Quiz14Serializers(serializers.ModelSerializer):
     class Meta:
-        model = Vue4
+        model = Quiz14
         fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
 
-class Vue5Serializers(serializers.ModelSerializer):
+class Quiz15Serializers(serializers.ModelSerializer):
     class Meta:
-        model = Vue5
+        model = Quiz15
+        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
+
+class Quiz16Serializers(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz16
+        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
+
+class Quiz17Serializers(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz17
+        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
+
+class Quiz18Serializers(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz18
+        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
+
+class Quiz19Serializers(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz19
+        fields = ('id','name','slug','question','option1','option2','option3','option4','answer')
+
+class Quiz20Serializers(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz20
         fields = ('id','name','slug','question','option1','option2','option3','option4','answer')

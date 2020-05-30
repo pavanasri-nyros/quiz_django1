@@ -5,20 +5,22 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
 from django.utils import timezone
-from .models import Quiz, Html2, Html3, Html4, Html5,Results
-from .models import Css1,Css2, Css3, Css4, Css5
-from .models import Js1,Js2,Js3,Js4,Js5
-from .models import Django1, Django2,Django3,Django4,Django5
-from .models import Vue1,Vue2,Vue3, Vue4, Vue5
+from .models import Quiz, Html2, Quiz3, Quiz4, Quiz5, Results
+from .models import Quiz6, Quiz7, Quiz8, Quiz9, Quiz10, Quiz11, Quiz12
+from .models import Quiz13, Quiz14, Quiz15, Quiz16,Quiz17, Quiz18, Quiz19, Quiz20
 from rest_framework import generics
 from .serializers import QuizSerializers, Html2Serializers, Html3Serializers, Html4Serializers, Html5Serializers
-from .serializers import Css1Serializers, Css2Serializers, Css3Serializers, Css4Serializers, Css5Serializers
-from .serializers import Js1Serializers, Js2Serializers, Js3Serializers, Js4Serializers, Js5Serializers
-from .serializers import Django1Serializers,Django2Serializers,Django3Serializers,Django4Serializers,Django5Serializers
-from .serializers import Vue1Serializers,Vue2Serializers,Vue3Serializers,Vue4Serializers,Vue5Serializers
+from .serializers import Css1Serializers, Css2Serializers, Css3Serializers,Quiz9Serializers, Quiz10Serializers
+from .serializers import Quiz11Serializers, Quiz12Serializers
+from .serializers import Quiz13Serializers, Quiz14Serializers
+from .serializers import Quiz15Serializers, Quiz16Serializers
+from .serializers import Quiz17Serializers, Quiz18Serializers
+from .serializers import Quiz19Serializers, Quiz20Serializers
+
+
+
 from django.contrib.auth.decorators import  login_required
 from django.http import HttpResponse
-from .forms import Score
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -26,20 +28,10 @@ from django.views.decorators.csrf import csrf_exempt
 def home(request):
     return render(request, 'quiz/home.html')
 
-@login_required
-@csrf_exempt
-def score(request):
-    if request.method == 'GET':
-        return render(request, 'quiz/html/end.html',{'form':Score()})
-    else:
-        try:
-            form = Score(data=request.POST)
-            newscore = form.save(commit=False)
-            newscore.owner = request.user
-            newscore.save()
-            return redirect('category')
-        except ValueError:
-            return render(request, 'quiz/html/end.html',{'form':Score(), 'error' :'please fill the form properly'})
+
+def main(request):
+    return render(request,'quiz/main.html')
+
 
 
 @login_required
@@ -48,114 +40,243 @@ def category(request):
 
 @login_required
 def quizroom(request):
-    return render(request, 'quiz/html/quizroom.html')
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+
+    return render(request, 'quiz/html/quizroom.html',context)
 
 @login_required
 def html2(request):
-    quizname = Html2.objects.all()
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
     context = {
-        'quizname':quizname
+        'data': save_data
     }
+
     return render(request,'quiz/html/html2.html',context)
 
 @login_required
-def html3(request):
-    return render(request,'quiz/html/html3.html')
+def quiz3(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/html/html3.html', context)
 
 
 @login_required
-def html4(request):
-    html4 = Html4.objects.all()
-    return render(request,'quiz/html/html4.html',{'html4':html4})
+def quiz4(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/html/html4.html', context)
 
 @login_required
-def html5(request):
-    html5 = Html5.objects.all()
-    return render(request,'quiz/html/html5.html',{'html5':html5})
+def quiz5(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/html/html5.html',context)
 
 @login_required
-def css1(request):
-     return render(request,'quiz/css/quiz1.html')
-
-
-@login_required
-def css2(request):
-     return render(request,'quiz/css/quiz2.html')
-
-@login_required
-def css3(request):
-     return render(request,'quiz/css/quiz3.html')
-
-@login_required
-def css4(request):
-     return render(request,'quiz/css/quiz4.html')
-
-@login_required
-def css5(request):
-     return render(request,'quiz/css/quiz5.html')
-
-
-@login_required
-def js1(request):
-    return render(request,'quiz/javascript/quiz1.html')
-
-@login_required
-def js2(request):
-    return render(request,'quiz/javascript/quiz2.html')
-
-@login_required
-def js3(request):
-    return render(request,'quiz/javascript/quiz3.html')
-
-@login_required
-def js4(request):
-    return render(request,'quiz/javascript/quiz4.html')
-
-@login_required
-def js5(request):
-    return render(request,'quiz/javascript/quiz5.html')
+def quiz6(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/css/quiz1.html',context)
 
 
 @login_required
-def django1(request):
-    return render(request, 'quiz/django/quiz1.html')
+def quiz7(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/css/quiz2.html', context)
 
 @login_required
-def django2(request):
-    return render(request, 'quiz/django/quiz2.html')
+def quiz8(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/css/quiz3.html', context)
 
 @login_required
-def django3(request):
-    return render(request, 'quiz/django/quiz3.html')
+def quiz9(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/javascript/quiz1.html',context)
 
 @login_required
-def django4(request):
-    return render(request, 'quiz/django/quiz4.html')
+def quiz10(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/javascript/quiz2.html', context)
 
-@login_required
-def django5(request):
-    return render(request, 'quiz/django/quiz5.html')
+def quiz11(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/javascript/quiz3.html', context)
+
+def quiz12(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/javascript/quiz4.html', context)
+
+def quiz13(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/django/quiz1.html', context)
+
+def quiz14(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/django/quiz2.html', context)
+
+def quiz15(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/django/quiz3.html', context)
+
+def quiz16(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/django/quiz4.html', context)
+
+def quiz17(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/vuejs/quiz1.html', context)
 
 
-@login_required
-def vuejs1(request):
-    return render(request, 'quiz/vuejs/quiz1.html')
+def quiz18(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/vuejs/quiz2.html', context)
 
-@login_required
-def vuejs2(request):
-    return render(request, 'quiz/vuejs/quiz2.html')
+def quiz19(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/vuejs/quiz3.html', context)
 
-@login_required
-def vuejs3(request):
-    return render(request, 'quiz/vuejs/quiz3.html')
+def quiz20(request):
+    name = request.GET.get('name')
+    scores = request.GET.get('scores')
+    status = request.GET.get('status')
+    quizname = request.GET.get('quizname')
+    save_data = Results.objects.create(username=name, quizname=quizname, score=scores, status=status)
+    context = {
+        'data': save_data
+    }
+    return render(request,'quiz/vuejs/quiz4.html', context)
 
-@login_required
-def vuejs4(request):
-    return render(request, 'quiz/vuejs/quiz4.html')
 
-@login_required
-def vuejs5(request):
-    return render(request, 'quiz/vuejs/quiz5.html')
+
+
+
 
 
 def signupuser(request):
@@ -190,7 +311,7 @@ def logoutuser(request):
     if request.method == "POST":
         logout(request)
         return redirect('home')
-  
+
 
 def profile(request):
     scores = Results.objects.filter(username=request.user)
@@ -223,7 +344,7 @@ class QuizAPIDetailView(generics.ListCreateAPIView):
     serializer_class = QuizSerializers
 
 # #api(html2)
-        
+
 class HtmlAPItwo(generics.RetrieveUpdateDestroyAPIView):
       queryset = Html2.objects.all()
       serializer_class = Html2Serializers
@@ -234,268 +355,174 @@ class HtmlAPIDetailtwo(generics.ListCreateAPIView):
 
 
 # #api(html3)
-        
+
 class HtmlAPIthree(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Html3.objects.all()
+      queryset = Quiz3.objects.all()
       serializer_class = Html3Serializers
 
 class HtmlAPIDetailthree(generics.ListCreateAPIView):
-     queryset = Html3.objects.all()
+     queryset = Quiz3.objects.all()
      serializer_class = Html3Serializers
 
 # #api(html4)
-        
+
 class HtmlAPIfour(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Html4.objects.all()
+      queryset = Quiz4.objects.all()
       serializer_class = Html4Serializers
 
 class HtmlAPIDetailfour(generics.ListCreateAPIView):
-     queryset = Html4.objects.all()
+     queryset = Quiz4.objects.all()
      serializer_class = Html4Serializers
 
 
 # #api(html5)
-        
+
 class HtmlAPIfive(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Html5.objects.all()
+      queryset = Quiz5.objects.all()
       serializer_class = Html5Serializers
 
 class HtmlAPIDetailfive(generics.ListCreateAPIView):
-     queryset = Html5.objects.all()
+     queryset = Quiz5.objects.all()
      serializer_class = Html5Serializers
 
 
 # #api(css1)
-        
+
 class CssAPIone(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Css1.objects.all()
+      queryset = Quiz6.objects.all()
       serializer_class = Css1Serializers
 
 class CssAPIDetailone(generics.ListCreateAPIView):
-     queryset = Css1.objects.all()
+     queryset = Quiz6.objects.all()
      serializer_class = Css1Serializers
 
 # #api(css2)
-        
+
 class CssAPItwo(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Css2.objects.all()
+      queryset = Quiz7.objects.all()
       serializer_class = Css2Serializers
 
 class CssAPIDetailtwo(generics.ListCreateAPIView):
-     queryset = Css2.objects.all()
+     queryset = Quiz7.objects.all()
      serializer_class = Css2Serializers
 
 # #api(css3)
-        
+
 class CssAPIthree(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Css3.objects.all()
+      queryset = Quiz8.objects.all()
       serializer_class = Css3Serializers
 
 class CssAPIDetailthree(generics.ListCreateAPIView):
-     queryset = Css3.objects.all()
+     queryset = Quiz8.objects.all()
      serializer_class = Css3Serializers
 
+#api(quiz9)
+class Quiz9API(generics.RetrieveUpdateDestroyAPIView):
+      queryset = Quiz9.objects.all()
+      serializer_class = Quiz9Serializers
 
-# #api(css4)
-        
-class CssAPIfour(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Css4.objects.all()
-      serializer_class = Css4Serializers
+class Quiz9Detail(generics.ListCreateAPIView):
+     queryset = Quiz9.objects.all()
+     serializer_class = Quiz9Serializers
 
-class CssAPIDetailfour(generics.ListCreateAPIView):
-     queryset = Css4.objects.all()
-     serializer_class = Css4Serializers
+#api(quiz10)
+class Quiz10API(generics.RetrieveUpdateDestroyAPIView):
+      queryset = Quiz10.objects.all()
+      serializer_class = Quiz10Serializers
 
+class Quiz10Detail(generics.ListCreateAPIView):
+     queryset = Quiz10.objects.all()
+     serializer_class = Quiz10Serializers
 
-# #api(css5)
-        
-class CssAPIfive(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Css5.objects.all()
-      serializer_class = Css5Serializers
+#api(quiz11)
+class Quiz11API(generics.RetrieveUpdateDestroyAPIView):
+      queryset = Quiz11.objects.all()
+      serializer_class = Quiz11Serializers
 
-class CssAPIDetailtfive(generics.ListCreateAPIView):
-     queryset = Css5.objects.all()
-     serializer_class = Css5Serializers
+class Quiz11Detail(generics.ListCreateAPIView):
+     queryset = Quiz11.objects.all()
+     serializer_class = Quiz11Serializers
 
+#api(quiz12)
+class Quiz12API(generics.RetrieveUpdateDestroyAPIView):
+      queryset = Quiz12.objects.all()
+      serializer_class = Quiz12Serializers
 
-# #api(js1)
-        
-class JsAPIone(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Js1.objects.all()
-      serializer_class = Js1Serializers
-
-class JsAPIDetailone(generics.ListCreateAPIView):
-     queryset = Js1.objects.all()
-     serializer_class = Js1Serializers
-
-
- #api(js2)
-        
-class JsAPItwo(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Js2.objects.all()
-      serializer_class = Js2Serializers
-
-class JsAPIDetailtwo(generics.ListCreateAPIView):
-     queryset = Js2.objects.all()
-     serializer_class = Js2Serializers
-
-##api(js3)
-        
-class JsAPIthree(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Js3.objects.all()
-      serializer_class = Js3Serializers
-
-class JsAPIDetailthree(generics.ListCreateAPIView):
-     queryset = Js3.objects.all()
-     serializer_class = Js3Serializers
+class Quiz12Detail(generics.ListCreateAPIView):
+     queryset = Quiz12.objects.all()
+     serializer_class = Quiz12Serializers
 
 
-# #api(js4)
-        
-class JsAPIfour(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Js4.objects.all()
-      serializer_class = Js4Serializers
+#api(quiz13)
+class Quiz13API(generics.RetrieveUpdateDestroyAPIView):
+      queryset = Quiz13.objects.all()
+      serializer_class = Quiz13Serializers
 
-class JsAPIDetailfour(generics.ListCreateAPIView):
-     queryset = Js4.objects.all()
-     serializer_class = Js4Serializers
+class Quiz13Detail(generics.ListCreateAPIView):
+     queryset = Quiz13.objects.all()
+     serializer_class = Quiz13Serializers
 
-# #api(js5)
-        
-class JsAPIfive(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Js5.objects.all()
-      serializer_class = Js5Serializers
+#api(quiz14)
+class Quiz14API(generics.RetrieveUpdateDestroyAPIView):
+      queryset = Quiz14.objects.all()
+      serializer_class = Quiz14Serializers
 
-class JsAPIDetailtfive(generics.ListCreateAPIView):
-     queryset = Js5.objects.all()
-     serializer_class = Js5Serializers
+class Quiz14Detail(generics.ListCreateAPIView):
+     queryset = Quiz14.objects.all()
+     serializer_class = Quiz14Serializers
 
+#api(quiz15)
+class Quiz15API(generics.RetrieveUpdateDestroyAPIView):
+      queryset = Quiz15.objects.all()
+      serializer_class = Quiz15Serializers
 
-# #api(django1)
-        
-class DjangoAPIone(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Django1.objects.all()
-      serializer_class = Django1Serializers
+class Quiz15Detail(generics.ListCreateAPIView):
+     queryset = Quiz15.objects.all()
+     serializer_class = Quiz15Serializers
 
-class DjangoAPIDetailone(generics.ListCreateAPIView):
-     queryset = Django1.objects.all()
-     serializer_class = Django1Serializers
+#api(quiz16)
+class Quiz16API(generics.RetrieveUpdateDestroyAPIView):
+      queryset = Quiz16.objects.all()
+      serializer_class = Quiz16Serializers
 
+class Quiz16Detail(generics.ListCreateAPIView):
+     queryset = Quiz16.objects.all()
+     serializer_class = Quiz16Serializers
 
- #api(djs2)
-        
-class DjangoAPItwo(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Django2.objects.all()
-      serializer_class = Django2Serializers
+#api(quiz17)
+class Quiz17API(generics.RetrieveUpdateDestroyAPIView):
+      queryset = Quiz17.objects.all()
+      serializer_class = Quiz17Serializers
 
-class DjangoAPIDetailtwo(generics.ListCreateAPIView):
-     queryset = Django2.objects.all()
-     serializer_class = Django2Serializers
+class Quiz17Detail(generics.ListCreateAPIView):
+     queryset = Quiz17.objects.all()
+     serializer_class = Quiz17Serializers
 
-# #api(djs3)
-        
-class DjangoAPIthree(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Django3.objects.all()
-      serializer_class = Django3Serializers
+#api(quiz18)
+class Quiz18API(generics.RetrieveUpdateDestroyAPIView):
+      queryset = Quiz18.objects.all()
+      serializer_class = Quiz18Serializers
 
-class DjangoAPIDetailthree(generics.ListCreateAPIView):
-     queryset = Django3.objects.all()
-     serializer_class = Django3Serializers
+class Quiz18Detail(generics.ListCreateAPIView):
+     queryset = Quiz18.objects.all()
+     serializer_class = Quiz18Serializers
 
+#api(quiz19)
+class Quiz19API(generics.RetrieveUpdateDestroyAPIView):
+      queryset = Quiz19.objects.all()
+      serializer_class = Quiz19Serializers
 
-# #api(djs4)
-        
-class DjangoAPIfour(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Django4.objects.all()
-      serializer_class = Django4Serializers
-
-class DjangoAPIDetailfour(generics.ListCreateAPIView):
-     queryset = Django4.objects.all()
-     serializer_class = Django4Serializers
-
-# #api(djs5)
-        
-class DjangoAPIfive(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Django5.objects.all()
-      serializer_class = Django5Serializers
-
-class DjangoAPIDetailtfive(generics.ListCreateAPIView):
-     queryset = Django5.objects.all()
-     serializer_class = Django5Serializers
+class Quiz19Detail(generics.ListCreateAPIView):
+     queryset = Quiz19.objects.all()
+     serializer_class = Quiz19Serializers
 
 
-# #api(vuejs1)
-        
-class VueAPIone(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Vue1.objects.all()
-      serializer_class = Vue1Serializers
+#api(quiz20)
+class Quiz20API(generics.RetrieveUpdateDestroyAPIView):
+      queryset = Quiz20.objects.all()
+      serializer_class = Quiz20Serializers
 
-class VueAPIDetailone(generics.ListCreateAPIView):
-     queryset = Vue1.objects.all()
-     serializer_class = Vue1Serializers
+class Quiz20Detail(generics.ListCreateAPIView):
+     queryset = Quiz20.objects.all()
+     serializer_class = Quiz20Serializers
 
-
- #api(vuejs2)
-        
-class VueAPItwo(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Vue2.objects.all()
-      serializer_class = Vue2Serializers
-
-class VueAPIDetailtwo(generics.ListCreateAPIView):
-     queryset = Vue2.objects.all()
-     serializer_class = Vue2Serializers
-
-# #api(vuejs3)
-        
-class VueAPIthree(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Vue3.objects.all()
-      serializer_class = Vue3Serializers
-
-class VueAPIDetailthree(generics.ListCreateAPIView):
-     queryset = Vue3.objects.all()
-     serializer_class = Vue3Serializers
-
-
-# #api(vuejs4)
-        
-class VueAPIfour(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Vue4.objects.all()
-      serializer_class = Vue4Serializers
-
-class VueAPIDetailfour(generics.ListCreateAPIView):
-     queryset = Vue4.objects.all()
-     serializer_class = Vue4Serializers
-
-# #api(vuejs5)
-        
-class VueAPIfive(generics.RetrieveUpdateDestroyAPIView):
-      queryset = Vue5.objects.all()
-      serializer_class = Vue5Serializers
-
-class VueAPIDetailtfive(generics.ListCreateAPIView):
-     queryset = Vue5.objects.all()
-     serializer_class = Vue5Serializers
-import json
-
-
-def target_view(request):
-    if request.method == 'GET':
-        return render(request, 'quiz/html/end.html',{'form':Score()})
-    else:
-        try:
-            form = Score(data=request.POST)
-            newscore = form.save(commit=False)
-            newscore.user= request.user
-            newscore.save()
-            return redirect('profile')
-        except ValueError:
-            return render(request, 'quiz/html/end.html',{'form':Score(), 'error' :'please fill the form properly'})
-
-
-   
-def main(request):
-    return render(request,'quiz/main.html')
-   
-   
-   
-  

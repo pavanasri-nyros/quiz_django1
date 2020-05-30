@@ -4,7 +4,7 @@ from .models import Results
 class Score(ModelForm):
     class Meta():
         model = Results
-        fields = ['username','quizname','score']
+        fields = ['username','score']
 
 
     

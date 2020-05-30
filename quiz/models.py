@@ -30,7 +30,7 @@ class Html2(models.Model):
         return self.name
 
 
-class Html3(models.Model):
+class Quiz3(models.Model):
     name = models.CharField(max_length=50,default='')
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -44,7 +44,7 @@ class Html3(models.Model):
         return self.question
 
 
-class Html4(models.Model):
+class Quiz4(models.Model):
     name = models.CharField(max_length=50, default='')
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -58,7 +58,7 @@ class Html4(models.Model):
         return self.question
 
 
-class Html5(models.Model):
+class Quiz5(models.Model):
     name = models.CharField(max_length = 50)
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -73,7 +73,7 @@ class Html5(models.Model):
 
 
 
-class Css1(models.Model):
+class Quiz6(models.Model):
     name = models.CharField(max_length = 50)
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -87,7 +87,7 @@ class Css1(models.Model):
         return self.question
 
 
-class Css2(models.Model):
+class Quiz7(models.Model):
     name = models.CharField(max_length = 50)
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -100,7 +100,7 @@ class Css2(models.Model):
     def __str__(self):
         return self.question
 
-class Css3(models.Model):
+class Quiz8(models.Model):
     name = models.CharField(max_length = 50)
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -113,7 +113,7 @@ class Css3(models.Model):
     def __str__(self):
         return self.question
 
-class Css4(models.Model):
+class Quiz9(models.Model):
     name = models.CharField(max_length = 50)
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -126,7 +126,19 @@ class Css4(models.Model):
     def __str__(self):
         return self.question
 
-class Css5(models.Model):
+class Quiz10(models.Model):
+    name = models.CharField(max_length = 50)
+    slug = models.SlugField(max_length =200)
+    question = models.CharField(max_length=200)
+    option1 = models.CharField(max_length=200)
+    option2 = models.CharField(max_length=200)
+    option3 = models.CharField(max_length=200)
+    option4 = models.CharField(max_length=200)
+    answer = models.CharField(max_length = 200)
+
+    def __str__(self):
+        return self.question
+class Quiz11(models.Model):
     name = models.CharField(max_length = 50)
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -139,20 +151,7 @@ class Css5(models.Model):
     def __str__(self):
         return self.question
 
-#javascript
-class Js1(models.Model):
-    name = models.CharField(max_length = 50)
-    slug = models.SlugField(max_length =200)
-    question = models.CharField(max_length=200)
-    option1 = models.CharField(max_length=200)
-    option2 = models.CharField(max_length=200)
-    option3 = models.CharField(max_length=200)
-    option4 = models.CharField(max_length=200)
-    answer = models.CharField(max_length = 200)
-
-    def __str__(self):
-        return self.question
-class Js2(models.Model):
+class Quiz12(models.Model):
     name = models.CharField(max_length = 50)
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -165,7 +164,7 @@ class Js2(models.Model):
     def __str__(self):
         return self.question
 
-class Js3(models.Model):
+class Quiz13(models.Model):
     name = models.CharField(max_length = 50)
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -177,20 +176,7 @@ class Js3(models.Model):
 
     def __str__(self):
         return self.question
-class Js4(models.Model):
-    name = models.CharField(max_length = 50)
-    slug = models.SlugField(max_length =200)
-    question = models.CharField(max_length=200)
-    option1 = models.CharField(max_length=200)
-    option2 = models.CharField(max_length=200)
-    option3 = models.CharField(max_length=200)
-    option4 = models.CharField(max_length=200)
-    answer = models.CharField(max_length = 200)
-
-    def __str__(self):
-        return self.question
-
-class Js5(models.Model):
+class Quiz14(models.Model):
     name = models.CharField(max_length = 50)
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -203,8 +189,31 @@ class Js5(models.Model):
     def __str__(self):
         return self.question
 
-#Django
-class Django1(models.Model):
+class Quiz15(models.Model):
+    name = models.CharField(max_length = 50)
+    slug = models.SlugField(max_length =200)
+    question = models.CharField(max_length=200)
+    option1 = models.CharField(max_length=200)
+    option2 = models.CharField(max_length=200)
+    option3 = models.CharField(max_length=200)
+    option4 = models.CharField(max_length=200)
+    answer = models.CharField(max_length = 200)
+
+    def __str__(self):
+        return self.question
+class Quiz16(models.Model):
+    name = models.CharField(max_length = 50)
+    slug = models.SlugField(max_length =200)
+    question = models.CharField(max_length=200)
+    option1 = models.CharField(max_length=200)
+    option2 = models.CharField(max_length=200)
+    option3 = models.CharField(max_length=200)
+    option4 = models.CharField(max_length=200)
+    answer = models.CharField(max_length = 200)
+
+    def __str__(self):
+        return self.question
+class Quiz17(models.Model):
     name = models.CharField(max_length = 50)
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -217,7 +226,7 @@ class Django1(models.Model):
     def __str__(self):
         return self.question
 
-class Django2(models.Model):
+class Quiz18(models.Model):
     name = models.CharField(max_length = 50)
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -229,8 +238,7 @@ class Django2(models.Model):
 
     def __str__(self):
         return self.question
-
-class Django3(models.Model):
+class Quiz19(models.Model):
     name = models.CharField(max_length = 50)
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -242,7 +250,7 @@ class Django3(models.Model):
 
     def __str__(self):
         return self.question
-class Django4(models.Model):
+class Quiz20(models.Model):
     name = models.CharField(max_length = 50)
     slug = models.SlugField(max_length =200)
     question = models.CharField(max_length=200)
@@ -254,98 +262,14 @@ class Django4(models.Model):
 
     def __str__(self):
         return self.question
-
-class Django5(models.Model):
-    name = models.CharField(max_length = 50)
-    slug = models.SlugField(max_length =200)
-    question = models.CharField(max_length=200)
-    option1 = models.CharField(max_length=200)
-    option2 = models.CharField(max_length=200)
-    option3 = models.CharField(max_length=200)
-    option4 = models.CharField(max_length=200)
-    answer = models.CharField(max_length = 200)
-
-    def __str__(self):
-        return self.question
-
-
-
-#VueJs
-class Vue1(models.Model):
-    name = models.CharField(max_length = 50)
-    slug = models.SlugField(max_length =200)
-    question = models.CharField(max_length=200)
-    option1 = models.CharField(max_length=200)
-    option2 = models.CharField(max_length=200)
-    option3 = models.CharField(max_length=200)
-    option4 = models.CharField(max_length=200)
-    answer = models.CharField(max_length = 200)
-
-    def __str__(self):
-        return self.question
-class Vue2(models.Model):
-    name = models.CharField(max_length = 50)
-    slug = models.SlugField(max_length =200)
-    question = models.CharField(max_length=200)
-    option1 = models.CharField(max_length=200)
-    option2 = models.CharField(max_length=200)
-    option3 = models.CharField(max_length=200)
-    option4 = models.CharField(max_length=200)
-    answer = models.CharField(max_length = 200)
-
-    def __str__(self):
-        return self.question
-
-class Vue3(models.Model):
-    name = models.CharField(max_length = 50)
-    slug = models.SlugField(max_length =200)
-    question = models.CharField(max_length=200)
-    option1 = models.CharField(max_length=200)
-    option2 = models.CharField(max_length=200)
-    option3 = models.CharField(max_length=200)
-    option4 = models.CharField(max_length=200)
-    answer = models.CharField(max_length = 200)
-
-    def __str__(self):
-        return self.question
-class Vue4(models.Model):
-    name = models.CharField(max_length = 50)
-    slug = models.SlugField(max_length =200)
-    question = models.CharField(max_length=200)
-    option1 = models.CharField(max_length=200)
-    option2 = models.CharField(max_length=200)
-    option3 = models.CharField(max_length=200)
-    option4 = models.CharField(max_length=200)
-    answer = models.CharField(max_length = 200)
-
-    def __str__(self):
-        return self.question
-
-class Vue5(models.Model):
-    name = models.CharField(max_length = 50)
-    slug = models.SlugField(max_length =200)
-    question = models.CharField(max_length=200)
-    option1 = models.CharField(max_length=200)
-    option2 = models.CharField(max_length=200)
-    option3 = models.CharField(max_length=200)
-    option4 = models.CharField(max_length=200)
-    answer = models.CharField(max_length = 200)
-
-    def __str__(self):
-        return self.question
-
-
-
-
-
-
 
 #Results Model
 
 class Results(models.Model):
-    username = models.CharField(max_length=50,default='')
-    quizname = models.CharField(max_length=50, default='Quiz')
-    score = models.IntegerField()
+    username = models.CharField(max_length=50,null=True, blank=True)
+    quizname = models.CharField(max_length=50,null=True, blank=True)
+    score = models.IntegerField(null=True,blank=True)
+    status = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
-        return self.username
+        return self.username or ''

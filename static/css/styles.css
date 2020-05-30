@@ -85,11 +85,13 @@ body{
 	color: black;
 }
 
+.heading{
+	text-align: center;
+}
 .result{
     margin-top: 40px;
 	text-align: center;
     font-size: 30px;
-    background: white;
     padding: 20px;
     height: 50px;
     margin-left: 70px;
@@ -98,7 +100,6 @@ body{
 .counter{
 	text-align: center;
     font-size: 30px;
-    background: white;
     height: 50px;
     margin-left: 70px;
     margin-right: 70px;
@@ -108,47 +109,53 @@ body{
 .status{
 	text-align: center;
     font-size: 30px;
-    background: white;
     height: 50px;
     margin-left: 70px;
     margin-right: 70px;
     padding: 20px;
 
 }
-.home
-{
-	text-align: center;
-    font-size: 30px;
-    background: white;
-    height: 50px;
-    margin-left: 70px;
-    margin-right: 70px;
-    padding: 20px;
 
-}
-.scoresaver
-{
-	text-align: center;
-    font-size: 30px;
-    background: white;
-    height: 50px;
-    margin-left: 70px;
-    margin-right: 70px;
-    padding: 20px;
-
-}
 .share{
 	text-align: center;
     font-size: 30px;
-    background: white;
     height: 70px;
+    margin-left: 70px;
+    margin-right: 70px;
+	padding: 20px;
+	margin-top: 115px;
+
+}
+
+.quizname{
+
+	text-align: center;
+    font-size: 30px;
+    height: 50px;
     margin-left: 70px;
     margin-right: 70px;
     padding: 20px;
 
 }
 
-
+.form-controlname {
+    width: 40%;
+    margin-left: 350px;
+	margin-top: 20px;
+			display: block;
+		height: calc(1.5em + .75rem + 2px);
+		padding: .375rem .75rem;
+		font-size: 1rem;
+		font-weight: 400;
+		line-height: 1.5;
+		color: #495057;
+		background-color: #fff;
+		background-clip: padding-box;
+		border: 1px solid #ced4da;
+		border-radius: .25rem;
+		transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	
+}
 
 .option input:checked .option{
 	background: #08038C;

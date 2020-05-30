@@ -10,30 +10,31 @@ from .views import  HtmlAPIDetailfive, HtmlAPIfive
 from .views import  CssAPIDetailone, CssAPIone
 from .views import  CssAPIDetailtwo, CssAPItwo
 from .views import  CssAPIDetailthree, CssAPIthree
-from .views import  CssAPIDetailfour, CssAPIfour
-from .views import  CssAPIDetailtfive, CssAPIfive
-from .views import  JsAPIDetailone, JsAPIone
-from .views import  JsAPIDetailtwo, JsAPItwo
-from .views import  JsAPIDetailthree, JsAPIthree
-from .views import  JsAPIDetailfour, JsAPIfour
-from .views import  JsAPIDetailtfive,  JsAPIfive
-from .views import  DjangoAPIDetailone, DjangoAPIone
-from .views import  DjangoAPIDetailtwo, DjangoAPItwo
-from .views import  DjangoAPIDetailthree, DjangoAPIthree
-from .views import  DjangoAPIDetailfour, DjangoAPIfour
-from .views import  DjangoAPIDetailtfive,  DjangoAPIfive
-from .views import  VueAPIDetailone, VueAPIone
-from .views import  VueAPIDetailtwo, VueAPItwo
-from .views import  VueAPIDetailthree, VueAPIthree
-from .views import  VueAPIDetailfour, VueAPIfour
-from .views import  VueAPIDetailtfive,  VueAPIfive
+from .views import  Quiz9Detail, Quiz9API
+from .views import  Quiz10Detail, Quiz10API
+from .views import  Quiz11Detail, Quiz11API
+from .views import  Quiz12Detail, Quiz12API
+from .views import  Quiz13Detail, Quiz13API
+from .views import  Quiz14Detail, Quiz14API
+from .views import  Quiz15Detail, Quiz15API
+from .views import  Quiz16Detail, Quiz16API
+from .views import  Quiz17Detail, Quiz17API
+from .views import  Quiz18Detail, Quiz18API
+from .views import  Quiz19Detail, Quiz19API
+from .views import  Quiz20Detail, Quiz20API
+
+
+
+
+
+
 
 
 urlpatterns = [
 
     path('home', views.home,name = "home"),
     path('main',views.main, name='main'),
-    path('', views.score, name = "score"),
+    #path('', views.score, name = "score"),
     path('profile/',views.profile, name = "profile"),
     path('category/',views.category, name = "category"),
 
@@ -44,130 +45,104 @@ urlpatterns = [
     path('api/<int:pk>/',QuizAPIView.as_view(), name = "list"),       
     
     #html2
-    path('html2/',views.html2, name = "html2"),
+    path('quiz2',views.html2, name = "html2"),
     path('api2/', HtmlAPIDetailtwo.as_view(),name = "quizapidetail" ),
     path('api2/<int:pk>/',HtmlAPItwo.as_view(), name = "list"), 
 
     #html3
-    path('html3/',views.html3, name = "html3"),
+    path('quiz3',views.quiz3, name = "quiz3"),
      path('api3/', HtmlAPIDetailthree.as_view(),name = "quizapidetail" ),
     path('api3/<int:pk>/',HtmlAPIthree.as_view(), name = "list"), 
 
 
     #html4
-    path('html4/', views.html4, name = "html4"),
+    path('quiz4', views.quiz4, name = "quiz4"),
     path('api4/', HtmlAPIDetailfour.as_view(),name = "quizapidetail" ),
     path('api4/<int:pk>/',HtmlAPIfour.as_view(), name = "list"), 
 
     #html5
-    path('html5/', views.html5, name = 'html5'),
+    path('quiz5', views.quiz5, name = 'quiz5'),
     path('api5/', HtmlAPIDetailfive.as_view(),name = "quizapidetail" ),
     path('api5/<int:pk>/',HtmlAPIfive.as_view(), name = "list"), 
 
 
     #css1
-    path('css1/',views.css1, name='css1'),
+    path('quiz6',views.quiz6, name='quiz6'),
     path('api6/', CssAPIDetailone.as_view(),name = "quizapidetail" ),
     path('api6/<int:pk>/',CssAPIone.as_view(), name = "list"), 
 
     #css2
-    path('css2/',views.css2, name='css2'),
+    path('quiz7',views.quiz7, name='quiz7'),
     path('api7/', CssAPIDetailtwo.as_view(),name = "quizapidetail" ),
     path('api7/<int:pk>/',CssAPItwo.as_view(), name = "list"), 
      
     #css3
-    path('css3/',views.css3, name='css3'),
+    path('quiz8',views.quiz8, name='quiz8'),
     path('api8/', CssAPIDetailthree.as_view(),name = "quizapidetail" ),
-    path('api8/<int:pk>/',CssAPIthree.as_view(), name = "list"), 
+    path('api8/<int:pk>/',CssAPIthree.as_view(), name = "list"),
 
-    #css4
-    path('css4/',views.css4, name='css4'),
-    path('api9/', CssAPIDetailfour.as_view(),name = "quizapidetail" ),
-    path('api9/<int:pk>/',CssAPIfour.as_view(), name = "list"), 
+    #javascript1
+    path('quiz9',views.quiz9, name='quiz9'),
+    path('quizapi9/', Quiz9Detail.as_view(),name = "quizapidetail" ),
+    path('quizapi9/<int:pk>/',Quiz9API.as_view(), name = "list"),
+ 
+   #javascript12
+    path('quiz10',views.quiz10, name='quiz10'),
+    path('quizapi10/', Quiz10Detail.as_view(),name = "quizapidetail" ),
+    path('quizapi10/<int:pk>/',Quiz10API.as_view(), name = "list"),
 
-    #css5
-    path('css5/',views.css5, name='css5'),
-    path('api10/', CssAPIDetailtfive.as_view(),name = "quizapidetail" ),
-    path('api10/<int:pk>/',CssAPIfive.as_view(), name = "list"), 
-   
+      #javascript1
+    path('quiz11',views.quiz11, name='quiz11'),
+    path('quizapi11/', Quiz11Detail.as_view(),name = "quizapidetail" ),
+    path('quizapi11/<int:pk>/',Quiz11API.as_view(), name = "list"),
+ 
+   #javascript12
+    path('quiz12' ,views.quiz12, name='quiz12'),
+    path('quizapi12/', Quiz12Detail.as_view(),name = "quizapidetail" ),
+    path('quizapi12/<int:pk>/',Quiz12API.as_view(), name = "list"),
 
-    #js1
-    path('js1/',views.js1, name='js1'),
-    path('api11/', JsAPIDetailone.as_view(),name = "quizapidetail" ),
-    path('api11/<int:pk>/',JsAPIone.as_view(), name = "list"), 
-
-    #Js2
-    path('js2/',views.js2, name='js2'),
-    path('api12/', JsAPIDetailtwo.as_view(),name = "quizapidetail" ),
-    path('api12/<int:pk>/',JsAPItwo.as_view(), name = "list"), 
-     
-    #Js3
-    path('js3/',views.js3, name='js3'),
-    path('api13/', JsAPIDetailthree.as_view(),name = "quizapidetail" ),
-    path('api13/<int:pk>/',JsAPIthree.as_view(), name = "list"), 
-
-    #Js4
-    path('js4/',views.js4, name='js4'),
-    path('api14/', JsAPIDetailfour.as_view(),name = "quizapidetail" ),
-    path('api14/<int:pk>/',JsAPIfour.as_view(), name = "list"), 
-
-    #Js5
-    path('js5/',views.js5, name='js5'),
-    path('api15/', JsAPIDetailtfive.as_view(),name = "quizapidetail" ),
-    path('api15/<int:pk>/',JsAPIfive.as_view(), name = "list"), 
-
-     #Django1
-    path('django1/',views.django1, name='django1'),
-    path('api16/', DjangoAPIDetailone.as_view(),name = "quizapidetail" ),
-    path('api116/<int:pk>/',DjangoAPIone.as_view(), name = "list"), 
+    #django1
+    path('quiz13' ,views.quiz13, name='quiz13'),
+    path('quizapi13/', Quiz13Detail.as_view(),name = "quizapidetail" ),
+    path('quizapi13/<int:pk>/',Quiz13API.as_view(), name = "list"),
 
     #django2
-    path('django2/',views.django2, name='django2'),
-    path('api17/', DjangoAPIDetailtwo.as_view(),name = "quizapidetail" ),
-    path('api17/<int:pk>/',DjangoAPItwo.as_view(), name = "list"), 
-     
-    #Django3
-    path('django3/',views.django3, name='django3'),
-    path('api18/', DjangoAPIDetailthree.as_view(),name = "quizapidetail" ),
-    path('api18/<int:pk>/',DjangoAPIthree.as_view(), name = "list"), 
+    path('quiz14' ,views.quiz14, name='quiz14'),
+    path('quizapi14/', Quiz14Detail.as_view(),name = "quizapidetail" ),
+    path('quizapi14/<int:pk>/',Quiz14API.as_view(), name = "list"),
 
-    #Django4
-    path('django4/',views.django4, name='django4'),
-    path('api19/', DjangoAPIDetailfour.as_view(),name = "quizapidetail" ),
-    path('api19/<int:pk>/',DjangoAPIfour.as_view(), name = "list"), 
+    #django3
+    path('quiz15' ,views.quiz15, name='quiz15'),
+    path('quizapi15/', Quiz15Detail.as_view(),name = "quizapidetail" ),
+    path('quizapi15/<int:pk>/',Quiz15API.as_view(), name = "list"),
 
-    #dJango5
-    path('django5/',views.django5, name='django5'),
-    path('api20/', DjangoAPIDetailtfive.as_view(),name = "quizapidetail" ),
-    path('api20/<int:pk>/',DjangoAPIfive.as_view(), name = "list"), 
-   
+    #django4
+    path('quiz16' ,views.quiz16, name='quiz16'),
+    path('quizapi16/', Quiz16Detail.as_view(),name = "quizapidetail" ),
+    path('quizapi16/<int:pk>/',Quiz16API.as_view(), name = "list"),
 
-    #vuejs1
-    path('vuejs1/',views.vuejs1, name='vuejs1'),
-    path('api21/', VueAPIDetailone.as_view(),name = "quizapidetail" ),
-    path('api21/<int:pk>/',VueAPIone.as_view(), name = "list"), 
+#vuejs1
+    path('quiz17' ,views.quiz17, name='quiz17'),
+    path('quizapi17/', Quiz17Detail.as_view(),name = "quizapidetail" ),
+    path('quizapi17/<int:pk>/',Quiz17API.as_view(), name = "list"),
 
-    #vueJs2
-    path('vuejs2/',views.vuejs2, name='vuejs2'),
-    path('api22/', VueAPIDetailtwo.as_view(),name = "quizapidetail" ),
-    path('api22/<int:pk>/',VueAPItwo.as_view(), name = "list"), 
-     
-    #vueJs3
-    path('vuejs3/',views.vuejs3, name='vuejs3'),
-    path('api23/', VueAPIDetailthree.as_view(),name = "quizapidetail" ),
-    path('api23/<int:pk>/',VueAPIthree.as_view(), name = "list"), 
-
-    #vueJs4
-    path('vuejs4/',views.vuejs4, name='vuejs4'),
-    path('api24/', VueAPIDetailfour.as_view(),name = "quizapidetail" ),
-    path('api24/<int:pk>/',VueAPIfour.as_view(), name = "list"), 
-
-    #vueJs5
-    path('vuejs5/',views.vuejs5, name='vuejs5'),
-    path('api25/', VueAPIDetailtfive.as_view(),name = "quizapidetail" ),
-    path('api25/<int:pk>/',VueAPIfive.as_view(), name = "list"), 
+#vuejs1
+    path('quiz18' ,views.quiz18, name='quiz18'),
+    path('quizapi18/', Quiz18Detail.as_view(),name = "quizapidetail" ),
+    path('quizapi18/<int:pk>/',Quiz18API.as_view(), name = "list"),
 
 
-   #path('target_view/',views.target_view, name="target_view"),
+#vuejs3
+    path('quiz19' ,views.quiz19, name='quiz19'),
+    path('quizapi19/', Quiz19Detail.as_view(),name = "quizapidetail" ),
+    path('quizapi19/<int:pk>/',Quiz19API.as_view(), name = "list"),
 
-   ]
+
+#vuejs4
+    path('quiz20' ,views.quiz20, name='quiz20'),
+    path('quizapi20/', Quiz20Detail.as_view(),name = "quizapidetail" ),
+    path('quizapi20/<int:pk>/',Quiz20API.as_view(), name = "list"),
+
+
+
+]
