@@ -237,7 +237,7 @@ def quiz17(request):
     context = {
         'data': save_data
     }
-    return render(request,'quiz/vuejs/quiz1.html', context)
+    return render(request,'quiz/jquery/quiz1.html', context)
 
 
 def quiz18(request):
@@ -249,7 +249,7 @@ def quiz18(request):
     context = {
         'data': save_data
     }
-    return render(request,'quiz/vuejs/quiz2.html', context)
+    return render(request,'quiz/jquery/quiz2.html', context)
 
 def quiz19(request):
     name = request.GET.get('name')
@@ -260,7 +260,7 @@ def quiz19(request):
     context = {
         'data': save_data
     }
-    return render(request,'quiz/vuejs/quiz3.html', context)
+    return render(request,'quiz/jquery/quiz3.html', context)
 
 def quiz20(request):
     name = request.GET.get('name')
@@ -271,7 +271,7 @@ def quiz20(request):
     context = {
         'data': save_data
     }
-    return render(request,'quiz/vuejs/quiz4.html', context)
+    return render(request,'quiz/jquery/quiz4.html', context)
 
 
 
