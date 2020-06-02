@@ -118,7 +118,7 @@ window.onload = function()
 
            {
 
-            return validation();
+            return validation(root[elementNumber]);
 
            }
 
@@ -439,12 +439,7 @@ function validation(form)
 
 {
 
-
-
  var x = document.forms[0].elements; 
-
- var rc=0,rb=0;;
-
  
 
         for(var i=0;i<x.length;i++)
@@ -568,129 +563,12 @@ function validation(form)
                     x[i].focus();
 
                     x[i].style.border="1px solid yellow";
-                    x[i].textContent = "enter correct password"
 
                     return true;
 
                   }
 
               } 
-
-
-
-              else if(type=="date")
-
-              {
-
-
-
-                if(x[i].value.length == 0)
-
-                {
-
-                  x[i].focus();
-
-                  x[i].style.border="1px solid red";
-
-                  return false;
-
-                }
-
-
-
-              }
-
-
-
-            else if(type=="radio"){  
-
-                    var l= x[i].parentNode.children.length;
-
-                    for(var j=0;j<l;j++)
-
-                     {
-
-                        if(x[i].parentNode.children[j].type=="radio"){rb++;} 
-
-                        if(x[i].parentNode.children[j].checked==true){rc++;x[i].style.outline="0px";} 
-
-                     }
-
-                        if(rb>0 && rc==0){x[i].focus();x[i].style.outline="1px solid red";return false;}
-
-                        else {rb=0;rc=0;}
-
-                     }        
-
-              
-
-
-
-
-
-              else if(type == "checkbox")
-
-              {
-
-                var checkbtn=document.getElementsByName("qualification");
-
-                var ch=0;
-
-                for(var m=0 ;m<checkbtn.length; m++)
-
-                {
-
-                  if(checkbtn[m].checked)
-
-                  {
-
-                    ch++;
-
-                  }
-
-                }
-
-                if(ch == 0)
-
-                {
-
-                  checkbtn[0].focus();                  
-
-                  return false;
-
-                }
-
-              } 
-
-
-
-
-
-
-
-              else if(type=="select-one"){
-
-                if( x[i].value == "0" || x[i].value == ""|| x[i].value == "-1" || x[i].value == " " ){
-
-                     x[i].focus();
-
-                     x[i].style.border="0px";
-
-                     x[i].style.outline="1px solid red";
-
-                     return false;
-
-                } 
-
-                else if(x[i].value!="0"){
-
-                  x[i].style.outline="0px";
-
-                }
-
-                
-
-                }   
 
           
 

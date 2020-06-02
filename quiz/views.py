@@ -275,6 +275,8 @@ def quiz20(request):
 
 
 
+# Create your views here.
+
 def signupuser(request):
 
     if request.method == 'POST':
@@ -291,39 +293,67 @@ def signupuser(request):
 
         password = request.POST['password']
 
+        password2 = request.POST['password2']
 
 
 
          #Check if passwords match
 
-        if User.objects.filter(username = username).exists():
+        if password == password2:
+
+            #check username
+
+            if User.objects.filter(username = username).exists():
 
                 messages.error(request,'That username is taken')
 
                 return redirect('signupuser')
-            
-
-        else:
-            
-            if User.objects.filter(email=email).exists():
-                messages.error(request,'That email is being used')
-                return redirect('signupuser')
 
             else:
-                user = User.objects.create_user(username = username, password = password, email = email, first_name = first_name, last_name = last_name)
 
-                user.save()
+                if User.objects.filter(email=email).exists():
 
-                messages.success(request, 'You are now registered and can log in')
+                    messages.error(request,'That email is being used')
 
-                return redirect('loginuser')
+                    return redirect('signupuser')
+
+                else:
+
+                    #looks good
+
+                    user = User.objects.create_user(username = username, password = password, email = email, first_name = first_name, last_name = last_name)
+
+
+
+                    #login after register
+
+                    # auth.login(request, user)
+
+                    # messages.success(request, 'You are now logged in')
+
+                    # return redirect('index')
+
+
+
+                    user.save()
+
+                    messages.success(request, 'You are now registered and can log in')
+
+                    return redirect('loginuser')
+
+                    
+
+        else:
+
+             messages.error(request,'passwords do not match')
+
+             return redirect('signupuser')
+
 
 
     else:
 
         return render(request, 'quiz/accounts/signupuser.html')
-
-
 
 def loginuser(request):
 
