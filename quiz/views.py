@@ -16,7 +16,7 @@ from .serializers import Quiz13Serializers, Quiz14Serializers
 from .serializers import Quiz15Serializers, Quiz16Serializers
 from .serializers import Quiz17Serializers, Quiz18Serializers
 from .serializers import Quiz19Serializers, Quiz20Serializers
-
+from django.contrib import messages, auth
 
 
 from django.contrib.auth.decorators import  login_required
@@ -275,42 +275,170 @@ def quiz20(request):
 
 
 
-
-
-
-
 def signupuser(request):
-    if request.method == 'GET':
-        return render(request, 'quiz/accounts/signupuser.html', {'form': UserCreationForm()})
-    else:
-        #create a new user
-        if request.POST['password1'] == request.POST['password2']:
-            try:
-                user = User.objects.create_user(request.POST['username'], password = request.POST['password1'])
-                user.save()
-                login(request, user)
-                return redirect('main')
-            except IntegrityError:
-                return render(request, 'quiz/accounts/signupuser.html',{'forms':UserCreationForm(),'error':"That user name has been taken. Please try someother username"})
+
+    if request.method == 'POST':
+
+        #get form values
+
+        first_name = request.POST['first_name']
+
+        last_name = request.POST['last_name']
+
+        username = request.POST['username']
+
+        email = request.POST['email']
+
+        password = request.POST['password']
+
+        password2 = request.POST['password2']
+
+
+
+         #Check if passwords match
+
+        if password == password2:
+
+            #check username
+
+            if User.objects.filter(username = username).exists():
+
+                messages.error(request,'That username is taken')
+
+                return redirect('signupuser')
+
+            else:
+
+                if User.objects.filter(email=email).exists():
+
+                    messages.error(request,'That email is being used')
+
+                    return redirect('signupuser')
+
+                else:
+
+                    #looks good
+
+                    user = User.objects.create_user(username = username, password = password, email = email, first_name = first_name, last_name = last_name)
+
+
+
+                    #login after register
+
+                    # auth.login(request, user)
+
+                    # messages.success(request, 'You are now logged in')
+
+                    # return redirect('index')
+
+
+
+                    user.save()
+
+                    messages.success(request, 'You are now registered and can log in')
+
+                    return redirect('loginuser')
+
+                    
+
         else:
-            return render(request, 'quiz/accounts/signupuser.html',{'forms':UserCreationForm(), 'error':'password did not match'})
+
+             messages.error(request,'passwords do not match')
+
+             return redirect('signupuser')
+
+
+
+    else:
+
+        return render(request, 'quiz/accounts/signupuser.html')
+
+
 
 def loginuser(request):
-    if request.method == 'GET':
-        return render(request, 'quiz/accounts/loginuser.html', {'form':AuthenticationForm()})
-    else:
-        user = authenticate(request,username = request.POST['username'],password = request.POST['password'])
-        if user is None:
-            return render(request, 'quiz/accounts/loginuser.html', {'form':AuthenticationForm,'error':'Username and password did not match'})
-        else:
-            login(request,user)
-            return redirect('main')
 
-@login_required
+    if request.method == 'POST':
+
+       username = request.POST['username']
+
+       password = request.POST['password']
+
+
+
+       user = auth.authenticate(username = username, password = password)
+
+
+
+       if user is not None:
+
+           auth.login(request, user)
+
+           messages.success(request, 'you are now logged in')
+
+           return redirect('main')
+
+       else:
+
+           messages.error(request,' Invalid credentials')
+
+           return redirect('loginuser')
+
+            
+
+    else:
+
+       return render(request, 'quiz/accounts/loginuser.html')
+
+
+
+
+
 def logoutuser(request):
+
     if request.method == "POST":
-        logout(request)
+
+        auth.logout(request)
+
+        messages.success(request,'You are now logged out')
+
         return redirect('home')
+
+
+
+
+
+# def signupuser(request):
+#     if request.method == 'GET':
+#         return render(request, 'quiz/accounts/signupuser.html', {'form': UserCreationForm()})
+#     else:
+#         #create a new user
+#         if request.POST['password1'] == request.POST['password2']:
+#             try:
+#                 user = User.objects.create_user(request.POST['username'], password = request.POST['password1'])
+#                 user.save()
+#                 login(request, user)
+#                 return redirect('main')
+#             except IntegrityError:
+#                 return render(request, 'quiz/accounts/signupuser.html',{'forms':UserCreationForm(),'error':"That user name has been taken. Please try someother username"})
+#         else:
+#             return render(request, 'quiz/accounts/signupuser.html',{'forms':UserCreationForm(), 'error':'password did not match'})
+
+# def loginuser(request):
+#     if request.method == 'GET':
+#         return render(request, 'quiz/accounts/loginuser.html', {'form':AuthenticationForm()})
+#     else:
+#         user = authenticate(request,username = request.POST['username'],password = request.POST['password'])
+#         if user is None:
+#             return render(request, 'quiz/accounts/loginuser.html', {'form':AuthenticationForm,'error':'Username and password did not match'})
+#         else:
+#             login(request,user)
+#             return redirect('main')
+
+# @login_required
+# def logoutuser(request):
+#     if request.method == "POST":
+#         logout(request)
+#         return redirect('home')
 
 
 def profile(request):
