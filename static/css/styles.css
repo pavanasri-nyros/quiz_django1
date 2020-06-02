@@ -168,7 +168,27 @@ body{
 
 
 
+input:focus { 
 
+    outline: none !important;
+
+    border-color: red;
+
+    box-shadow: 0 0 10px #719ECE;
+
+}
+
+
+
+select:focus { 
+
+    outline: none !important;
+
+    border-color: red;
+
+    box-shadow: 0 0 10px #719ECE;
+
+}
 
 
 
