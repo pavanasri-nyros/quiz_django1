@@ -1,6 +1,6 @@
 {% extends 'quiz/base.html' %}
 
-
+{% load static %}
 
 {% load humanize %}
 
@@ -80,7 +80,7 @@
 
                             <label for="password2">Password</label>
 
-                            <input type="password" name="password" class="form-control" required>
+                            <input type="password" name="password" class="form-control"  id = "password" required>
 
                             </div>
 
@@ -88,9 +88,10 @@
 
                             <label for="password">Confirm Password</label>
 
-                            <input type="password" name="password2" class="form-control" required>
+                            <input type="password" name="password2" class="form-control" id="conformpassword" required>
 
                             </div>
+                            <div class="show_errors"></div>
 
                             <input type="submit" value="Register" class="btn btn-secondary btn-block">
 
@@ -110,6 +111,7 @@
 
     
 
+            <script src="{% static 'js/validation.js'%}"></script>
 
 
 {% endblock %}
