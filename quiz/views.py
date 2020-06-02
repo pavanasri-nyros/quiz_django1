@@ -292,13 +292,32 @@ def signupuser(request):
         password = request.POST['password']
 
 
-        user = User.objects.create_user(username = username, password = password, email = email, first_name = first_name, last_name = last_name)
 
-        user.save()
 
-        messages.success(request, 'You are now registered and can log in')
+         #Check if passwords match
 
-        return redirect('loginuser')
+        if User.objects.filter(username = username).exists():
+
+                messages.error(request,'That username is taken')
+
+                return redirect('signupuser')
+            
+
+        else:
+            
+            if User.objects.filter(email=email).exists():
+                messages.error(request,'That email is being used')
+                return redirect('signupuser')
+
+            else:
+                user = User.objects.create_user(username = username, password = password, email = email, first_name = first_name, last_name = last_name)
+
+                user.save()
+
+                messages.success(request, 'You are now registered and can log in')
+
+                return redirect('loginuser')
+
 
     else:
 

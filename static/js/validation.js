@@ -160,7 +160,8 @@ function myFocus(a)
 
     errorMsg.id = err;
 
-    errorMsg.textContent="Enter";   
+    errorMsg.textContent="This is the required field";   
+    errorMsg.style.color = "red";
 
     a.parentNode.appendChild(errorMsg);
 
@@ -274,7 +275,7 @@ function password(c)
 
   var todo2 = document.getElementById("conformpassword");
 
-  if(minLength==null) minLength=4;
+  if(minLength==null) minLength=6;
 
   if(maxLength==null) maxLength=12;
 
@@ -290,7 +291,7 @@ function password(c)
 
             { 
 
-              document.getElementById(show).innerHTML = "&#10008; enter minimum 4 chars"; 
+              document.getElementById(show).innerHTML = "&#10008; enter minimum 6 chars"; 
 
                   
 
@@ -322,7 +323,7 @@ function password(c)
 
             { 
 
-              document.getElementById(show).innerHTML = "&#10008; enter minimum 4 chars";
+              document.getElementById(show).innerHTML = "&#10008; enter minimum 6 chars";
 
               document.getElementById(show).style.color="red";            
 
@@ -386,7 +387,7 @@ function email(e)
 
       document.getElementById(show).innerHTML = "&#10008; Not Empty";   
 
-      document.getElementById(show).style.color="balck";         
+      document.getElementById(show).style.color="red";         
 
       return false;
 
@@ -569,7 +570,7 @@ function validation(form)
                     x[i].style.border="1px solid yellow";
                     x[i].textContent = "enter correct password"
 
-                    return false;
+                    return true;
 
                   }
 
