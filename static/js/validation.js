@@ -574,6 +574,5 @@ function validation(form)
 
         }
 
-        alert("Registration Successfull");
 
     }
