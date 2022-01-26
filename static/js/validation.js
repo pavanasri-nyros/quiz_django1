@@ -1,171 +1,72 @@
 window.onload = function()
 
 {
-
     var root = document.forms[0].elements;
-
-    var elementNumber;  
-
-
-
-
-
-//text boxes
-
-
-
-    for(elementNumber=0;elementNumber<root.length;elementNumber++)
-
-    {
-
-     if(root[elementNumber].type=="text")
-
-      {
-
-         root[elementNumber].onfocus = function()
-
-         {
-
-          myFocus(this);
-
-         }        
-
-         root[elementNumber].onkeyup = function()
-
-          {
-
-            text(this);
-
-          }
-
-       }
-
-      
-
-
-
-//password  
-
-
-
-
-
-       if(root[elementNumber].type=="password")
-
-       {
-
-        root[elementNumber].onfocus = function()
-
-        {
-
-          myFocus(this);
-
+    var elementNumber;
+    //text boxes
+    for (elementNumber = 0; elementNumber < root.length; elementNumber++) {
+        if (root[elementNumber].type == "text") {
+            root[elementNumber].onfocus = function() {
+                myFocus(this);
+            }
+            root[elementNumber].onkeyup = function() {
+                text(this);
+            }
         }
 
-        root[elementNumber].onkeyup = function()
 
-        {
-
-          password(this);
-
+        //password  
+        if (root[elementNumber].type == "password") {
+            root[elementNumber].onfocus = function() {
+                myFocus(this);
+            }
+            root[elementNumber].onkeyup = function() {
+                password(this);
+            }
         }
-
-       }
-
-       
-
-
-
-
-
-// email validation
-
-
-
-
-
-
-
-       if(root[elementNumber].type=="email")
-
-       {
-
-        root[elementNumber].onfocus = function()
-
-        {
-
-          myFocus(this);
-
+        // email validation
+        if (root[elementNumber].type == "email") {
+            root[elementNumber].onfocus = function() {
+                myFocus(this);
+            }
+            root[elementNumber].onkeyup = function() {
+                email(this);
+            }
+        } else if (root[elementNumber].type == "submit") {
+            root[elementNumber].onclick = function() {
+                return validation(root[elementNumber]);
+            }
         }
-
-        root[elementNumber].onkeyup = function()
-
-        {
-
-          email(this);
-
-        }
-
-       }    
-
-       
-
-      else if(root[elementNumber].type=="submit")
-
-        {
-
-           root[elementNumber].onclick = function()
-
-           {
-
-            return validation(root[elementNumber]);
-
-           }
-
-        }
-
-       
-
-      }
+    }
 
 }
 
 
 
-
-
-
-
 //onfocus function
-
-
-
-
-
-
 
 function myFocus(a)
 
 {
 
-  
 
-  var err=a.name + "error";
 
-  if(a.value.length == 0 && !document.getElementById(err))
+    var err = a.name + "error";
 
-  {
+    if (a.value.length == 0 && !document.getElementById(err))
 
-    var errorMsg = document.createElement('span');
+    {
 
-    errorMsg.id = err;
+        var errorMsg = document.createElement('span');
 
-    errorMsg.textContent="This is the required field";   
-    errorMsg.style.color = "red";
+        errorMsg.id = err;
 
-    a.parentNode.appendChild(errorMsg);
+        errorMsg.textContent = "This is the required field";
+        errorMsg.style.color = "red";
 
-  }
+        a.parentNode.appendChild(errorMsg);
+
+    }
 
 }
 
@@ -181,65 +82,61 @@ function myFocus(a)
 
 
 
- 
+
 
 function text(b)
 
-{   
+{
 
-      var type=b.getAttribute("type")
+    var type = b.getAttribute("type")
 
-      var show=b.name + "error";
+    var show = b.name + "error";
 
-      var minLength=b.getAttribute("min");
+    var minLength = b.getAttribute("min");
 
-      var maxLength=b.getAttribute("max");
+    var maxLength = b.getAttribute("max");
 
-      if(minLength==null) minLength=2;
+    if (minLength == null) minLength = 2;
 
-      if(maxLength==null) maxLength=50;
+    if (maxLength == null) maxLength = 50;
 
-     
 
-      if(type=="text")         
+
+    if (type == "text")
+
+    {
+
+
+
+        var l = b.value.length;
+
+        if (l == 0)
 
         {
 
-          
+            document.getElementById(show).innerHTML = "&#10008; minimum 2 chars";
 
-           var l=b.value.length;
+            document.getElementById(show).style.color = "red";
 
-           if(l==0)
+            return false;
 
-            { 
+        } else if
 
-              document.getElementById(show).innerHTML = "&#10008; minimum 2 chars"; 
+        (l >= minLength && l <= maxLength)
 
-              document.getElementById(show).style.color="red";
+        {
 
-              return false;
+            document.getElementById(show).innerHTML = "&#10004; ok";
 
-            }
+            document.getElementById(show).style.color = "green";
 
-            
+            return true;
 
-           else if
+        }
 
-            (l>=minLength && l<=maxLength)
+    }
 
-            {
 
-              document.getElementById(show).innerHTML = "&#10004; ok";              
-
-              document.getElementById(show).style.color="green";
-
-              return true;
-
-            }
-
-       }
-
-       
 
 }
 
@@ -261,89 +158,89 @@ function password(c)
 
 {
 
-  var type=c.getAttribute("type");
+    var type = c.getAttribute("type");
 
-  var typ=c.getAttribute("id")
+    var typ = c.getAttribute("id")
 
-  var show=c.name + "error";
+    var show = c.name + "error";
 
-  var minLength=c.getAttribute("min");
+    var minLength = c.getAttribute("min");
 
-  var maxLength=c.getAttribute("max");    
+    var maxLength = c.getAttribute("max");
 
-  var todo = document.getElementById("password");
+    var todo = document.getElementById("password");
 
-  var todo2 = document.getElementById("conformpassword");
+    var todo2 = document.getElementById("conformpassword");
 
-  if(minLength==null) minLength=6;
+    if (minLength == null) minLength = 6;
 
-  if(maxLength==null) maxLength=12;
+    if (maxLength == null) maxLength = 12;
 
-  if(typ=="conformpassword")    
+    if (typ == "conformpassword")
+
+    {
+
+        // atleast 2 digits,letters,special chars
+
+        var l = c.value.length;
+
+        if (l == 0)
 
         {
 
-           // atleast 2 digits,letters,special chars
+            document.getElementById(show).innerHTML = "&#10008; enter minimum 6 chars";
 
-           var l=c.value.length;
 
-           if(l==0)
 
-            { 
+            return false;
 
-              document.getElementById(show).innerHTML = "&#10008; enter minimum 6 chars"; 
+        } else if (todo.value !== todo2.value) {
 
-                  
+            document.getElementById(show).innerHTML = "&#10008; Password Not Matched";
 
-              return false;
+            document.getElementById(show).style.color = "red";
 
-            }else if(todo.value!==todo2.value){
+            return false;
 
-              document.getElementById(show).innerHTML = "&#10008; Password Not Matched"; 
+        } else if (todo.value == todo2.value) {
 
-              document.getElementById(show).style.color="red"; 
+            document.getElementById(show).innerHTML = "&#10004; Password matched";
 
-              return false; 
+            document.getElementById(show).style.color = "green";
 
-            }else if(todo.value==todo2.value){
+            return true;
 
-              document.getElementById(show).innerHTML = "&#10004; Password matched";
+        }
 
-              document.getElementById(show).style.color="green";
+    } else {
 
-              return true; 
+        var l = c.value.length;
 
-            }
+        if (l == 0)
 
-          }else{
+        {
 
-             var l=c.value.length;
+            document.getElementById(show).innerHTML = "&#10008; enter minimum 6 chars";
 
-              if(l==0)
+            document.getElementById(show).style.color = "red";
 
-            { 
+            return false;
 
-              document.getElementById(show).innerHTML = "&#10008; enter minimum 6 chars";
+        } else if (l >= minLength && l <= maxLength)
 
-              document.getElementById(show).style.color="red";            
+        {
 
-              return false;
+            document.getElementById(show).innerHTML = "&#10004; ok";
 
-             }else if(l>=minLength && l<=maxLength )
+            document.getElementById(show).style.color = "green";
 
-            {
+            return true;
 
-              document.getElementById(show).innerHTML = "&#10004; ok";              
+        }
 
-              document.getElementById(show).style.color="green";            
 
-              return true;
 
-            }
-
-              
-
-            }
+    }
 
 }
 
@@ -369,55 +266,55 @@ function email(e)
 
 {
 
-  var type=e.getAttribute("type");
+    var type = e.getAttribute("type");
 
-  var show=e.name + "error";
+    var show = e.name + "error";
 
-  if(type == "email")  
-
-  {
-
-    var match = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-    var l=e.value.length;
-
-    if(l==0)
-
-    { 
-
-      document.getElementById(show).innerHTML = "&#10008; Not Empty";   
-
-      document.getElementById(show).style.color="red";         
-
-      return false;
-
-    }
-
-    if(l>0 && match.test(e.value)==false)
+    if (type == "email")
 
     {
 
-      document.getElementById(show).innerHTML = "&#10008; Enter a valid email address";   
+        var match = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-      document.getElementById(show).style.color="red";         
+        var l = e.value.length;
 
-      return false;
+        if (l == 0)
+
+        {
+
+            document.getElementById(show).innerHTML = "&#10008; Not Empty";
+
+            document.getElementById(show).style.color = "red";
+
+            return false;
+
+        }
+
+        if (l > 0 && match.test(e.value) == false)
+
+        {
+
+            document.getElementById(show).innerHTML = "&#10008; Enter a valid email address";
+
+            document.getElementById(show).style.color = "red";
+
+            return false;
+
+        }
+
+        if (l > 0 && match.test(e.value) == true)
+
+        {
+
+            document.getElementById(show).innerHTML = "&#10004; ok";
+
+            document.getElementById(show).style.color = "green";
+
+            return true;
+
+        }
 
     }
-
-    if(l>0 && match.test(e.value)==true)
-
-    {
-
-      document.getElementById(show).innerHTML = "&#10004; ok";
-
-      document.getElementById(show).style.color="green";            
-
-      return true;
-
-    }
-
-  }
 
 }
 
@@ -439,140 +336,124 @@ function validation(form)
 
 {
 
- var x = document.forms[0].elements; 
- 
+    var x = document.forms[0].elements;
 
-        for(var i=0;i<x.length;i++)
+
+    for (var i = 0; i < x.length; i++)
+
+    {
+
+        var funRegex = /^[A-Za-z0-9 ]/;
+
+        var match = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        var type = x[i].type;
+
+        var minLength = x[i].getAttribute("min");
+
+        var maxLength = x[i].getAttribute("max");
+
+
+
+        if (type == "text")
 
         {
 
-              var funRegex = /^[A-Za-z0-9 ]/ ;
+            if (minLength == null) minLength = 2;
 
-              var match= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (maxLength == null) maxLength = 50;
 
-              var type = x[i].type;             
+            if (x[i].value.length < minLength || x[i].value.length > maxLength)
 
-              var minLength=x[i].getAttribute("min");
+            {
 
-              var maxLength=x[i].getAttribute("max");              
+                x[i].focus();
 
-          
+                x[i].style.border = "1px solid #990033";
 
-             if(type == "text") 
+                return false;
 
-              { 
+            } else if (x[i].value.length > minLength && x[i].value.length < maxLength && funRegex.test(x[i]).value == false)
 
-                if(minLength==null) minLength=2;
+            {
 
-                if(maxLength==null) maxLength=50;
+                x[i].focus();
 
-                if(x[i].value.length < minLength || x[i].value.length > maxLength) 
+                x[i].style.border = "1px solid #990033";
 
-                  {
+                return false;
 
-                    x[i].focus();
+            }
 
-                    x[i].style.border="1px solid #990033";
+        } else if (type == "email")
 
-                    return false;
+        {
 
-                  }               
 
-                else if(x[i].value.length>minLength && x[i].value.length<maxLength && funRegex.test(x[i]).value==false)
 
-                  {
+            if (x[i].value.length == 0)
 
-                    x[i].focus();
+            {
 
-                    x[i].style.border="1px solid #990033";
+                x[i].focus();
 
-                    return false;
+                x[i].style.border = "1px solid #990033";
 
-                  }
+                return false;
 
-                }  
+            }
 
-             
 
 
+            if (match.test(x[i].value) != true)
 
+            {
 
+                x[i].focus();
 
-            else if(type == "email")
+                x[i].style.border = "1px solid #990033";
 
-              {
+                return false;
 
-                
+            }
 
-                if(x[i].value.length == 0)
 
-                {
 
-                  x[i].focus();
+        } else if (type == "password")
 
-                  x[i].style.border="1px solid #990033";
+        {
 
-                  return false;
+            if (minLength == null) minLength = 6;
 
-                } 
+            if (maxLength == null) maxLength = 12;
 
-                
+            if (x[i].value.length < minLength || x[i].value.length > maxLength || x[i].value.length == 0)
 
-                if(match.test(x[i].value) != true)           
+            {
 
-                {
+                x[i].focus();
 
-                  x[i].focus();
+                x[i].style.border = "1px solid pink";
 
-                  x[i].style.border="1px solid #990033";
+                return true;
 
-                  return false;
+            } else if (x[i].value.length > minLength && x[i].value.length < maxLength)
 
-                }
+            {
 
+                x[i].focus();
 
+                x[i].style.border = "1px solid yellow";
 
-              }
+                return true;
 
-
-
-              else if(type == "password")
-
-              {
-
-                if(minLength==null) minLength=6;
-
-                if(maxLength==null) maxLength=12;
-
-                if(x[i].value.length < minLength || x[i].value.length > maxLength || x[i].value.length == 0) 
-
-                  {
-
-                    x[i].focus();
-
-                    x[i].style.border="1px solid pink";
-
-                    return true;
-
-                  }               
-
-                else if(x[i].value.length > minLength && x[i].value.length < maxLength)
-
-                  {
-
-                    x[i].focus();
-
-                    x[i].style.border="1px solid yellow";
-
-                    return true;
-
-                  }
-
-              } 
-
-          
+            }
 
         }
 
 
+
     }
+
+
+}
